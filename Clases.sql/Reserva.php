@@ -6,6 +6,7 @@ class Reserva {
 
     public function __construct() {
         $this->conexion = new Conexion();
+        $this->conexion = $db->conexion;
     }
 
     public function crear($vuelo_id, $pasajero_id, $clase_id, $asiento, $precio_final) {
