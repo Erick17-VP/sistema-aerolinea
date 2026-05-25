@@ -6,6 +6,7 @@ class ClaseVuelo {
 
     public function __construct() {
         $this->conexion = new Conexion();
+        $this->conexion = $db->conexion;
     }
 
     public function agregar($nombre, $factor_precio) {
