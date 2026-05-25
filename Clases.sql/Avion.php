@@ -3,22 +3,31 @@ include_once("Conexion.php");
 
 class Avion {
     private $conexion;
-
     public function __construct() {
-        $this->conexion = new Conexion();
+        $db = new Conexion();
+        $this->conexion = $db->conexion;
     }
-
+    
     public function agregar($modelo, $capacidad) {
-        $sql = "INSERT INTO aviones (modelo, capacidad) VALUES ('$modelo', '$capacidad')";
-        return $this->conexion->ejecutar($sql);
+        $stmt = $this->conexion->prepare(
+            "INSERT INTO aviones (modelo, capacidad)
+             VALUES (?, ?)"
+        );
+        $stmt->bind_param("si", $modelo, $capacidad);
+        return $stmt->execute();
     }
-
+    
     public function listar() {
-        return $this->conexion->consultar("SELECT * FROM aviones");
+        $sql = "SELECT * FROM aviones";
+        return $this->conexion->query($sql);
     }
 
     public function eliminar($id) {
-        return $this->conexion->ejecutar("DELETE FROM aviones WHERE id = $id");
+        $stmt = $this->conexion->prepare(
+            "DELETE FROM aviones WHERE id = ?"
+        );
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 }
 ?>
