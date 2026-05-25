@@ -6,6 +6,7 @@ class Destino {
 
     public function __construct() {
         $this->conexion = new Conexion();
+        $this->conexion = $db->conexion;
     }
 
     public function agregar($ciudad, $pais, $codigo) {
