@@ -2,7 +2,8 @@
 
 require_once __DIR__ . '/../config/database.php';
 
-class Vuelo {
+class Vuelo
+{
     private $db;
     private $table = 'vuelos';
 
@@ -21,13 +22,15 @@ class Vuelo {
     public $estado;
     public $fecha_creacion;
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $this->db = $database->connect();
     }
 
     // Obtener todos los vuelos con detalles
-    public function obtenerTodos() {
+    public function obtenerTodos()
+    {
         try {
             $query = "SELECT v.*,
                              a.numero_matricula,
@@ -52,7 +55,8 @@ class Vuelo {
     }
 
     // Obtener vuelo por ID con detalles
-    public function obtenerPorId($id) {
+    public function obtenerPorId($id)
+    {
         try {
             $query = "SELECT v.*,
                              a.numero_matricula,
@@ -81,7 +85,8 @@ class Vuelo {
     }
 
     // Obtener vuelos por destino
-    public function obtenerPorDestino($id_destino) {
+    public function obtenerPorDestino($id_destino)
+    {
         try {
             $query = "SELECT * FROM " . $this->table . "
                       WHERE id_destino_destino = :id_destino
@@ -98,7 +103,8 @@ class Vuelo {
     }
 
     // Obtener vuelos disponibles (estado = 'disponible' y fecha_salida > fecha actual)
-    public function obtenerDisponibles() {
+    public function obtenerDisponibles()
+    {
         try {
             $query = "SELECT * FROM " . $this->table . "
                       WHERE estado = 'disponible'
@@ -114,7 +120,8 @@ class Vuelo {
     }
 
     //  Crear nuevo vuelo
-    public function crear() {
+    public function crear()
+    {
         try {
             $query = "INSERT INTO " . $this->table . "
                       (numero_vuelo, id_avion, id_destino_origen, id_destino_destino, 
@@ -146,7 +153,8 @@ class Vuelo {
     }
 
     // Actualizar vuelo
-    public function actualizar() {
+    public function actualizar()
+    {
         try {
             $query = "UPDATE " . $this->table . "
                       SET numero_vuelo = :numero_vuelo,
@@ -185,7 +193,8 @@ class Vuelo {
     }
 
     // Eliminar vuelo
-    public function eliminar() {
+    public function eliminar()
+    {
         try {
             $query = "DELETE FROM " . $this->table . " WHERE id_vuelo = :id";
             $stmt = $this->db->prepare($query);
@@ -198,7 +207,8 @@ class Vuelo {
     }
 
     // Cambiar estado del vuelo (activo, cancelado, completado)
-    public function cambiarEstado($nuevoEstado) {
+    public function cambiarEstado($nuevoEstado)
+    {
         try {
             $query = "UPDATE " . $this->table . "
                       SET estado = :estado
@@ -215,4 +225,3 @@ class Vuelo {
         }
     }
 }
-?>
