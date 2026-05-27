@@ -1,16 +1,19 @@
 <?php
+
 /**
  * Configuración de conexión a la base de datos
  */
 
-class Database {
+class Database
+{
     private $host = 'localhost';
     private $db = 'aerolinea_db';
     private $user = 'root';
-    private $password = '';
+    private $password = 'VEPE-1702';
     private $conn;
 
-    public function connect() {
+    public function connect()
+    {
         try {
             $this->conn = new PDO(
                 'mysql:host=' . $this->host . ';dbname=' . $this->db,
@@ -25,8 +28,8 @@ class Database {
         }
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->conn ?? $this->connect();
     }
 }
-?>
